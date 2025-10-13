@@ -73,7 +73,7 @@ public class Ecommerce {
                     default -> System.out.println("Opção indisponível! Tente novamente.");
                 }
             } catch (java.util.InputMismatchException e) {
-                System.out.println("Erro, você digitou algo que distinto a um número. Por favor, digite novamente.");
+                System.out.println("Erro, você digitou algo que é distinto a um número. Por favor, digite novamente.");
                 scanner.nextLine();
             } catch (Exception e) {
                 System.err.println("FALHA AO ACESSAR DADOS!");
