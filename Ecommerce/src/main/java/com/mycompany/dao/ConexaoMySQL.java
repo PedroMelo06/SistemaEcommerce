@@ -13,7 +13,7 @@ import java.sql.SQLException;
  *
  * @author pedrolucas.melo
  */
-public class ConexaoMySQL implements ConexaoBD {
+public class ConexaoMySQL implements ConexaoDB {
     private static final String URL = "jdbc:mysql://localhost:3306/ecommerce";
     private static final String USUARIO = "root";  //Coloquei minhas credenciais professor, mas sei que vai usar as suas.
     private static final String SENHA = "*06032006Pedro";  //Coloquei minhas credenciais professor, mas sei que vai usar as suas.

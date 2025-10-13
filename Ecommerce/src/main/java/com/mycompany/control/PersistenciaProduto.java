@@ -5,7 +5,7 @@
 package com.mycompany.control;
 
 import com.mycompany.model.Produto;
-import com.mycompany.dao.ConexaoBD; 
+import com.mycompany.dao.ConexaoDB; 
 import com.mycompany.dao.ConexaoMySQL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,7 +18,7 @@ import java.util.List;
  * @author pedrolucas.melo
  */
 public class PersistenciaProduto implements RepositorioDeProdutos {
-    private ConexaoBD conexaoBD = new ConexaoMySQL(); 
+    private ConexaoDB conexaoDB = new ConexaoMySQL(); 
     
     private static final String NOME_TABELA = "produtos"; 
     private static final String ID = "id"; 
@@ -35,7 +35,7 @@ public class PersistenciaProduto implements RepositorioDeProdutos {
         ResultSet rs = null;
 
         try {
-            conexao = conexaoBD.obterConexao();
+            conexao = conexaoDB.obterConexao();
             
             String sql = "SELECT * FROM produtos"; 
 
@@ -55,7 +55,7 @@ public class PersistenciaProduto implements RepositorioDeProdutos {
         } catch (SQLException e) {
             throw new Exception("Erro ao listar produtos no banco de dados: " + e.getMessage());
         } finally {
-            conexaoBD.fecharConexao(conexao); 
+            conexaoDB.fecharConexao(conexao); 
         }
         return produtos;
     }
