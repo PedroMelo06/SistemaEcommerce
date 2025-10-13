@@ -5,9 +5,6 @@
  */
 package com.mycompany.model;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 /**
  *
  * @author pedrolucas.melo
@@ -19,27 +16,27 @@ public class Produto {
     private double preco;
     private int quantidade_estoque;
 
-    public Produto(){
-        this.quantidade_estoque = 0; 
+    public Produto() {
+        quantidade_estoque = 0;
     }
-    
-    public Produto(String nome){
-        this(); 
+
+    public Produto(String nome) {
+        this();
         this.nome = nome;
     }
-    
-    public Produto(String nome, String descricao){
-        this(nome); 
+
+    public Produto(String nome, String descricao) {
+        this(nome);
         this.descricao = descricao;
     }
-    
-    public Produto(String nome, String descricao, double preco){
-        this(nome, descricao); 
+
+    public Produto(String nome, String descricao, double preco) {
+        this(nome, descricao);
         this.preco = preco;
     }
-    
-    public Produto(int id, String nome, String descricao, double preco, int quantidade_estoque){
-        this(nome, descricao, preco); 
+
+    public Produto(int id, String nome, String descricao, double preco, int quantidade_estoque) {
+        this(nome, descricao, preco);
         this.id = id;
         this.quantidade_estoque = quantidade_estoque;
     }
@@ -83,5 +80,4 @@ public class Produto {
     public void setQuantidade_estoque(int quantidade_estoque) {
         this.quantidade_estoque = quantidade_estoque;
     }
-
 }
