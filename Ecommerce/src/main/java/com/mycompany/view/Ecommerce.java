@@ -27,11 +27,11 @@ public class Ecommerce {
         while (true) {
             try {
                 System.out.println("=== SISTEMA DE E-COMMERCE ===");
-                System.out.println("1 - Listar produtos");
-                System.out.println("2 - Adicionar ao carrinho");
-                System.out.println("3 - Ver carrinho");
-                System.out.println("4 - Remover do carrinho");
-                System.out.println("5 - Finalizar compra");
+                System.out.println("1 - Listar produtos disponíveis");
+                System.out.println("2 - Adicionar produto ao carrinho");
+                System.out.println("3 - Visualizar carrinho");
+                System.out.println("4 - Remover item do carrinho");
+                System.out.println("5 - Finalizar pedido");
                 System.out.println("6 - Sair");
                 System.out.print("Escolha a opcao: ");
                 
@@ -48,7 +48,7 @@ public class Ecommerce {
                         System.out.println("-----------------------------------------");
                         
                         if (produtosAtuais.isEmpty()) {
-                            System.out.println("Nenhum produto encontrado no estoque.");
+                            System.out.println("Não há produtos cadastrados no estoque.");
                         } else {
                             for (Produto item : produtosAtuais) {
                                 System.out.printf("%d | %s | R$ %.2f | %d\n",
@@ -66,18 +66,18 @@ public class Ecommerce {
                     case 4 -> { }
                     case 5 -> { }
                     case 6 -> {
-                        System.out.println("Finalizando o sistema...");
+                        System.out.println("Encerrando o programa...");
                         scanner.close();
                         return;
                     }
-                    default -> System.out.println("Opção inválida! Tente novamente.");
+                    default -> System.out.println("Opção indisponível! Tente novamente.");
                 }
             } catch (java.util.InputMismatchException e) {
-                System.out.println("Erro, você digitou algo que não é um número. Por favor, digite novamente.");
+                System.out.println("Erro, você digitou algo que distinto a um número. Por favor, digite novamente.");
                 scanner.nextLine();
             } catch (Exception e) {
-                System.err.println("ERRO NO ACESSO A DADOS!");
-                System.err.println("Detalhes: " + e.getMessage());
+                System.err.println("FALHA AO ACESSAR DADOS!");
+                System.err.println("Informações do erro: " + e.getMessage());
             }
         }
     }
