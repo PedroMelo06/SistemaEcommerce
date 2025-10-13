@@ -18,46 +18,45 @@ import java.util.List;
  * @author pedrolucas.melo
  */
 public class PersistenciaProduto implements RepositorioDeProdutos {
-    private ConexaoDB conexaoDB = new ConexaoMySQL(); 
+
+    private final ConexaoDB conexaoDB = new ConexaoMySQL(); 
     
-    private static final String NOME_TABELA = "produtos"; 
-    private static final String ID = "id"; 
-    private static final String NOME = "nome"; 
-    private static final String DESCRICAO = "descricao"; 
-    private static final String PRECO = "preco"; 
-    private static final String QUANTIDADE_ESTOQUE = "quantidade_estoque"; 
+    private static final String TABELA = "produtos"; 
+    private static final String COL_ID = "id"; 
+    private static final String COL_NOME = "nome"; 
+    private static final String COL_DESCRICAO = "descricao"; 
+    private static final String COL_PRECO = "preco"; 
+    private static final String COL_QTD_ESTOQUE = "quantidade_estoque"; 
 
     @Override
     public List<Produto> listarTodos() throws Exception {
-        List<Produto> produtos = new ArrayList<>();
+        List<Produto> listaProdutos = new ArrayList<>();
         Connection conexao = null;
-        PreparedStatement ps = null;
-        ResultSet rs = null;
+        PreparedStatement stmt = null;
+        ResultSet resultado = null;
 
         try {
             conexao = conexaoDB.obterConexao();
-            
-            String sql = "SELECT * FROM produtos"; 
+            String sql = "SELECT * FROM " + TABELA; 
+            stmt = conexao.prepareStatement(sql);
+            resultado = stmt.executeQuery();
 
-            ps = conexao.prepareStatement(sql);
-            rs = ps.executeQuery();
-
-            while (rs.next()) {
-                Produto produto = new Produto(
-                    rs.getInt("id"),
-                    rs.getString("nome"),
-                    rs.getString("descricao"),
-                    rs.getDouble("preco"),
-                    rs.getInt("quantidade_estoque")
+            while (resultado.next()) {
+                Produto p = new Produto(
+                    resultado.getInt(COL_ID),
+                    resultado.getString(COL_NOME),
+                    resultado.getString(COL_DESCRICAO),
+                    resultado.getDouble(COL_PRECO),
+                    resultado.getInt(COL_QTD_ESTOQUE)
                 );
-                produtos.add(produto);
+                listaProdutos.add(p);
             }
         } catch (SQLException e) {
-            throw new Exception("Erro ao listar produtos no banco de dados: " + e.getMessage());
+            throw new Exception("Falha ao listar produtos: " + e.getMessage(), e);
         } finally {
             conexaoDB.fecharConexao(conexao); 
         }
-        return produtos;
-    }
 
+        return listaProdutos;
+    }
 }

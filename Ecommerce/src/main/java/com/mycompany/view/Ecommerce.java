@@ -17,16 +17,15 @@ import com.mycompany.control.RepositorioDeProdutos;
  * @author pedrolucas.melo
  */
 public class Ecommerce {
-        public static void main(String[] args) {
+    public static void main(String[] args) {
         System.setOut(new PrintStream(System.out, true, StandardCharsets.UTF_8));
         
         RepositorioDeProdutos repositorio = new PersistenciaProduto();
-        
-        Scanner sc = new Scanner(System.in);
-        List<Produto> carrinho = new ArrayList<>(); 
+        Scanner scanner = new Scanner(System.in);
+        List<Produto> carrinhoCompras = new ArrayList<>();
 
-        while(true) {
-            try { 
+        while (true) {
+            try {
                 System.out.println("=== SISTEMA DE E-COMMERCE ===");
                 System.out.println("1 - Listar produtos");
                 System.out.println("2 - Adicionar ao carrinho");
@@ -36,56 +35,46 @@ public class Ecommerce {
                 System.out.println("6 - Sair");
                 System.out.print("Escolha a opcao: ");
                 
-                int opcao = sc.nextInt();
-                sc.nextLine();
+                int escolha = scanner.nextInt();
+                scanner.nextLine();
 
                 System.out.println();
                 
-                switch (opcao) {
-                    case 1 -> { 
+                switch (escolha) {
+                    case 1 -> {
                         System.out.println("=== LISTA DE PRODUTOS DISPONÍVEIS ===");
-                        
-                        List<Produto> produtosDisponiveis = repositorio.listarTodos();
+                        List<Produto> produtosAtuais = repositorio.listarTodos();
                         System.out.println("ID  |  NOME  |  PREÇO  |  ESTOQUE");
                         System.out.println("-----------------------------------------");
-                                
-                        if (produtosDisponiveis.isEmpty()) {
+                        
+                        if (produtosAtuais.isEmpty()) {
                             System.out.println("Nenhum produto encontrado no estoque.");
                         } else {
-                            for (Produto p : produtosDisponiveis) {
-                                System.out.printf("%d | %s | R$ %.2f | %d\n", p.getId(), p.getNome(), p.getPreco(), p.getQuantidade_estoque());
+                            for (Produto item : produtosAtuais) {
+                                System.out.printf("%d | %s | R$ %.2f | %d\n",
+                                    item.getId(),
+                                    item.getNome(),
+                                    item.getPreco(),
+                                    item.getQuantidade_estoque()
+                                );
                             }
                             System.out.println();
                         }
                     }
-
-                    case 2 -> { 
-                        
-                    } 
-                    
-                    case 3 -> { 
-                       
-                    }
-
-                    case 4 -> { 
-                        
-                    }
-
-                    case 5 -> { 
-                       
-                    }
-
-                    case 6 -> { 
+                    case 2 -> { }
+                    case 3 -> { }
+                    case 4 -> { }
+                    case 5 -> { }
+                    case 6 -> {
                         System.out.println("Finalizando o sistema...");
-                        sc.close();
+                        scanner.close();
                         return;
                     }
-
                     default -> System.out.println("Opção inválida! Tente novamente.");
                 }
             } catch (java.util.InputMismatchException e) {
                 System.out.println("Erro, você digitou algo que não é um número. Por favor, digite novamente.");
-                sc.nextLine(); 
+                scanner.nextLine();
             } catch (Exception e) {
                 System.err.println("ERRO NO ACESSO A DADOS!");
                 System.err.println("Detalhes: " + e.getMessage());
