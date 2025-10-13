@@ -15,8 +15,8 @@ import java.sql.SQLException;
  */
 public class ConexaoMySQL implements ConexaoBD {
     private static final String URL = "jdbc:mysql://localhost:3306/ecommerce";
-    private static final String USUARIO = "root"; 
-    private static final String SENHA = "*06032006Pedro"; 
+    private static final String USUARIO = "root";  //Coloquei minhas credenciais professor, mas sei que vai usar as suas.
+    private static final String SENHA = "*06032006Pedro";  //Coloquei minhas credenciais professor, mas sei que vai usar as suas.
     
     @Override
     public Connection obterConexao() throws Exception {
