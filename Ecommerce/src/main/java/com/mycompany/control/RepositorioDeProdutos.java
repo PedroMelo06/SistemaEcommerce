@@ -14,4 +14,6 @@ public interface RepositorioDeProdutos {
     
     List<Produto> listarTodos() throws Exception;
     
+    void salvar(Produto produto) throws Exception; // <-- novo método
 }
+    

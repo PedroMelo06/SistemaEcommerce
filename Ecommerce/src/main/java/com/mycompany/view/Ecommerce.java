@@ -61,7 +61,62 @@ public class Ecommerce {
                             System.out.println();
                         }
                     }
-                    case 2 -> { }
+                   case 2 -> {
+    System.out.println("=== ADICIONAR PRODUTO AO CARRINHO ===");
+
+    // Lista os produtos disponíveis
+    List<Produto> produtosDisponiveis = repositorio.listarTodos();
+    if (produtosDisponiveis.isEmpty()) {
+        System.out.println("Não há produtos disponíveis no momento.");
+        System.out.println();
+        break;
+    }
+
+    System.out.println("ID  |  NOME  |  PREÇO  |  ESTOQUE");
+    System.out.println("-----------------------------------------");
+    for (Produto p : produtosDisponiveis) {
+        System.out.printf("%d | %s | R$ %.2f | %d\n",
+            p.getId(),
+            p.getNome(),
+            p.getPreco(),
+            p.getQuantidade_estoque()
+        );
+    }
+
+    System.out.print("\nDigite o ID do produto que deseja adicionar ao carrinho: ");
+    int idEscolhido = scanner.nextInt();
+
+    Produto produtoSelecionado = null;
+    for (Produto p : produtosDisponiveis) {
+        if (p.getId() == idEscolhido) {
+            produtoSelecionado = p;
+            break;
+        }
+    }
+
+    if (produtoSelecionado == null) {
+        System.out.println("Produto não encontrado. Tente novamente.");
+        System.out.println();
+        break;
+    }
+
+    if (produtoSelecionado.getQuantidade_estoque() <= 0) {
+        System.out.println("Produto sem estoque disponível.");
+        System.out.println();
+        break;
+    }
+
+    // Adiciona ao carrinho
+    carrinhoCompras.add(produtoSelecionado);
+
+    // Atualiza o estoque
+    produtoSelecionado.setQuantidade_estoque(produtoSelecionado.getQuantidade_estoque() - 1);
+    repositorio.salvar(produtoSelecionado);
+
+    System.out.println("Produto \"" + produtoSelecionado.getNome() + "\" adicionado ao carrinho!");
+    System.out.println();
+}
+
                     case 3 -> { }
                     case 4 -> { }
                     case 5 -> { }
